@@ -1,28 +1,25 @@
 import middy from '@middy/core'
-import cors from '@middy/http-cors'
 import httpErrorHandler from '@middy/http-error-handler'
+import { createTodoHelper } from '../../../helpers/api.helper.mjs'
+import getUserId from '../utils.mjs'
+import httpCors from '@middy/http-cors'
 
 export const handler = middy()
   .use(httpErrorHandler())
   .use(
-    cors({
+    httpCors({
       credentials: true
     })
   )
   .handler(async (event) => {
-    console.log('Processing event: ', event)
-
-    // const scanCommand = {
-    //   TableName: groupsTable
-    // }
-    // const result = await dynamoDbClient.scan(scanCommand)
-    // const items = event
-    const item = JSON.parse(event.body)
-
+    const newTodo = JSON.parse(event.body)
+    const userId = getUserId(event)
+    const item = await createTodoHelper(userId, newTodo)
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify({
         item

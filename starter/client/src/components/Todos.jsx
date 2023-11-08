@@ -78,7 +78,7 @@ export function Todos() {
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `https://dev-ukzy5olgmoplicqn.us.auth0.com/api/v2/`,
-        scope: 'delete:todo'
+        scope: 'delete:todos'
       })
       await deleteTodo(accessToken, todoId)
       setTodos(todos.filter((todo) => todo.todoId !== todoId))
@@ -92,7 +92,7 @@ export function Todos() {
       const todo = todos[pos]
       const accessToken = await getAccessTokenSilently({
         audience: `https://dev-ukzy5olgmoplicqn.us.auth0.com/api/v2/`,
-        scope: 'write:todo'
+        scope: 'write:todos'
       })
       await patchTodo(accessToken, todo.todoId, {
         name: todo.name,
