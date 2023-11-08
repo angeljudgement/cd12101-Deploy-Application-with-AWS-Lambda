@@ -5,7 +5,8 @@
   "description": "Serverless TODO image app",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "serverless offline"
   },
   "keywords": [],
   "author": "Ivan Mushketyk",
@@ -25,5 +26,8 @@
     "serverless-iam-roles-per-function": "^3.2.0",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "serverless-offline": "^13.2.0"
   }
 }
